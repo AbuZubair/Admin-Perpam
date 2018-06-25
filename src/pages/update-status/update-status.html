@@ -1,0 +1,31 @@
+<!--
+  Generated template for the UpdateStatusPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Update</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <h1>{{user.name}}</h1>
+      <h2>{{user.myDate}} (YYYY-MM-DD)</h2>
+      <h2>{{user.no}}</h2>
+      <p>{{user.o_n}}</p>
+      <p>{{user.gr}}</p>
+      <p>{{user.spl.name}}</p>
+      <p>{{user.dr.name}}</p>
+        <button ion-button (click)="updateStatus(
+          user.status
+        )">Confirm</button>
+    </ion-item>
+  </ion-list>
+</ion-content>

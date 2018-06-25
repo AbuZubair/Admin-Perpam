@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar color="primary"> 
+    <ion-title>
+      Appointment
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="logout()">
+        Logout &nbsp; <ion-icon ios="ios-exit" md="md-exit"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <ion-toolbar no-border-top >
+      <ion-segment [(ngModel)]="status">
+        <ion-segment-button value="notconfirm">
+          Not-confirmed
+        </ion-segment-button>
+        <ion-segment-button value="confirm">
+          Confirmed
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+<div [ngSwitch]="status">
+  <div *ngSwitchCase="'notconfirm'" class="ctc">
+    <ion-list *ngFor="let user of users | async ">
+      <ion-item *ngIf="user.tgl >= today && user.status == '0'">
+        <ng-container >
+          <h1>{{user.name}}</h1>
+          <h2>{{user.myDate | date: "mediumDate"}}</h2>
+          <button ion-button item-end navPush="UpdateStatusPage" [navParams]="{user: user}">View</button>
+        <!--  <button ion-button item-end navPush="BuddychatPage" [navParams]="{user: user}">Chat</button> -->
+        </ng-container>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <div *ngSwitchCase="'confirm'"> 
+   
+      <ion-item>
+          <ion-label stacked>Search tanggal perjanjian</ion-label>  
+          <ion-datetime ion-searchbar displayFormat="MM/DD/YYYY" pickerFormat="MMMM DD YYYY" [(ngModel)]="terms"></ion-datetime> 
+      </ion-item>
+        
+    <ion-list *ngFor="let user of users | async | search : terms">
+    <!--  <ion-searchbar ion-datetime displayFormat="MM/DD/YYYY" pickerFormat="MMMM DD YYYY" [(ngModel)]="terms"></ion-searchbar>-->
+        
+
+        <ion-item *ngIf="user.status == '1' && terms">
+          <ng-container >
+            <h1>{{user.name}}</h1>
+            <h2>{{user.myDate | date: "mediumDate"}}</h2>
+            <h2>Tanggal Perjanjian : {{user.tgl}}</h2>
+            <button ion-button item-end navPush="ViewStatusPage" [navParams]="{user: user}">View</button>
+          <!--  <button ion-button item-end navPush="BuddychatPage" [navParams]="{user: user}">Chat</button> -->
+          </ng-container>
+        </ion-item>
+    </ion-list>
+  </div>
+</div>
+</ion-content>

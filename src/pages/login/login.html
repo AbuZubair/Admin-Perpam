@@ -1,0 +1,25 @@
+
+<ion-content padding class="login">
+  <div id="logo">
+    <img src="assets/imgs/logo-perpam.png">
+  </div>
+
+  <ion-list class="login" id="list">
+
+  <ion-item class="login">
+    <ion-label floating>Email</ion-label>
+    <ion-input type="text" #uname></ion-input>
+  </ion-item>
+
+  <ion-item class="login">
+    <ion-label floating>Password</ion-label>
+    <ion-input type="password" #password></ion-input>
+  </ion-item>
+
+</ion-list>
+
+  <button ion-button block large type="submit"  (click)="signin()">
+      Sign In
+    </button>
+
+</ion-content>
